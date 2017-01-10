@@ -200,8 +200,8 @@
         },
         setAutoSize:function () {
             var me = this;
-            autoSizePage.checked = true;
-            me.autoSizePageHanler();
+            autoSizeContent.checked = true;
+            me.autoSizeContentHanler();
         }
     };
 
