@@ -161,7 +161,7 @@ function fnSetAttribute( element, attName, attValue ) {
 </head>
 <body>
 <div class="content">
-    <table class="table table-bordered table-striped table-hover">
+    <table class="table table-bordered table-striped">
      <tr>
         <th><span>控件名称</span><span class="label label-important">*</span></th>
         <th><span>控件样式</span> </th>
@@ -170,14 +170,18 @@ function fnSetAttribute( element, attName, attValue ) {
         <td><input id="orgname" placeholder="必填项" type="text"/></td>
         <td> 宽：<input id="orgwidth" type="text" value="150" class="input-small span1"/> px&nbsp;&nbsp;&nbsp;&nbsp;高：<input id="orgsize" type="text" class="input-small span1" value="1"/> 行</td>
     </tr>
-    <tr style="display: none;">
+    <!-- <tr>
         <th>
         <span>关联子菜单名称</span> <a id="showTips" data-content="若关联子菜单，需要子下拉菜单设置的时候在每个选项后加上特殊标记以记录与父菜单关系，形如“子菜单项目|父菜单项目”，则父菜单发生变化，子菜单会随之自动刷新筛选" rel="popover" data-original-title="说明"><i class="icon-info-sign"></i></a> </th>
         <td><input id="orgChild" type="text" size="20" > </td>
+    </tr> -->
+    <tr>
+        <th><span>初始选定</span></th>
+        <th></th>
     </tr>
     <tr>
-        <th><span class="pull-right">初始选定</span></th>
         <td> <span id="orgvalue" class="uneditable-input" style="height:20px;"></span> </td>
+        <td></td>
     </tr>
     <tr>
         <th colspan="2">
@@ -195,7 +199,7 @@ function fnSetAttribute( element, attName, attValue ) {
                 <a title="新增" onclick="fnAdd();" class="btn btn-primary"><i class="icon-white icon-plus"></i></a>
                 <a title="修改" onclick="fnModify();" class="btn btn-default"><i class="icon-edit"></i></a>
             </div>
-            <input type="text" placeholder="输入列表值..." class="span2" id="orgtext">
+            <input type="text" placeholder="输入列表值..." class="span3" id="orgtext">
         </td>
         <td>
             <div class="btn-group">

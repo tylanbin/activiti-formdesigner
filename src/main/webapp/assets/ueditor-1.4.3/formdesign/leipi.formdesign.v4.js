@@ -706,7 +706,7 @@ UE.plugins['qrcode'] = function () {
                 name:thePlugins,
                 editor:this,
                 title: '二维码',
-                cssRules:"width:600px;height:370px;",
+                cssRules:"width:600px;height:380px;",
                 buttons:[
                 {
                     className:'edui-okbutton',
@@ -893,7 +893,7 @@ UE.plugins['leipi'] = function () {
                 name:thePlugins,
                 editor:this,
                 title: '表单设计器 - 清单',
-                cssRules:"width:620px;height:220px;",
+                cssRules:"width:540px;height:220px;",
                 buttons:[
                 {
                     className:'edui-okbutton',
@@ -974,7 +974,7 @@ UE.registerUI('button_leipi',function(editor,uiName){
     //因为你是添加button,所以需要返回这个button
     return btn;
 });
-UE.registerUI('button_template',function(editor,uiName){
+/*UE.registerUI('button_template',function(editor,uiName){
     if(!this.options.toolleipi)
     {
         return false;
@@ -1008,7 +1008,7 @@ UE.registerUI('button_template',function(editor,uiName){
 
     //因为你是添加button,所以需要返回这个button
     return btn;
-});
+});*/
 UE.registerUI('button_preview',function(editor,uiName){
     if(!this.options.toolleipi)
     {

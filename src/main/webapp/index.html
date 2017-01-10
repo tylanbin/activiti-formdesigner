@@ -163,8 +163,8 @@
 		// 这里可以选择自己需要的工具按钮名称
 		toolbars : [['fullscreen', 'source', '|', 'undo', 'redo', '|',
 		             'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'removeformat', '|',
-		             'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', '|',
-		             'fontfamily', 'fontsize', '|', 'indent', '|', 'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|',
+		             'forecolor', 'backcolor', // 'insertorderedlist', 'insertunorderedlist', '|',
+		             'fontfamily', 'fontsize', '|', // 'indent', '|', 'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|',
 		             'link', 'unlink', '|', 'horizontal', 'spechars', 'wordimage'],
 	    	 		['inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'insertrownext', 'deleterow', 
 	    	 		 'insertcol', 'insertcolnext', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', '|',
@@ -176,9 +176,11 @@
 		// 关闭elementPath
 		elementPathEnabled : false,
 		// 默认的编辑区域高度
-		initialFrameHeight : 500
+		initialFrameHeight : 500,
 		// 引入自身css使编辑器兼容你网站css
 		// iframeCssUrl:"formdesign/bootstrap/css/bootstrap.css"
+		// 关闭自动保存
+		enableAutoSave: false
 		// 更多其他参数，请参考ueditor.config.js中的配置项
 	});
 	
@@ -200,8 +202,7 @@
 				var parse_attr = new Array(), attr_arr_all = new Object(), name = '', select_dot = '', is_new = false;
 				var p0 = plugin;
 				var tag = p6 ? p6 : p4;
-				// alert(tag + " \n- t1 - "+p1 +" \n-2- " +p2+" \n-3- " +p3+" \n-4-
-				// " +p4+" \n-5- " +p5+" \n-6- " +p6);
+				// alert(tag + " \n- t1 - "+p1 +" \n-2- " +p2+" \n-3- " +p3+" \n-4- " +p4+" \n-5- " +p5+" \n-6- " +p6);
 				if (tag == 'radios' || tag == 'checkboxs') {
 					plugin = p2;
 				} else if (tag == 'select') {
@@ -270,7 +271,6 @@
 							arr['name'] = option['name'];
 							arr['leipiplugins'] = attr_arr_all['leipiplugins'];
 							add_fields[option['name']] = arr;
-	
 						}
 					});
 					attr_arr_all['content'] += '</span>';
@@ -345,6 +345,7 @@
 				leipiEditor.sync();/* 同步内容 */
 				alert("你点击了保存,这里可以异步提交，请自行处理....");
 				return false;
+				
 				// --------------以下仅参考-----------------------------------------------------------------------------------------------------
 				var type_value = '', formid = 0, fields = $("#fields").val(), formeditor = '';
 				if (typeof type !== 'undefined') {
@@ -395,6 +396,7 @@
 				leipiEditor.sync(); /* 同步内容 */
 				alert("你点击了预览,请自行处理....");
 				return false;
+				
 				// --------------以下仅参考-------------------------------------------------------------------
 				/* 设计form的target 然后提交至一个新的窗口进行预览 */
 				document.saveform.target = "mywin";

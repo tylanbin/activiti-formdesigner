@@ -13,6 +13,9 @@
     <link rel="stylesheet" type="text/css" href="bootstrap/css/ie.css">
     <![endif]-->
     <link rel="stylesheet" href="leipi.style.css">
+    <style type="text/css">
+    	.radio {margin-bottom:5px;}
+    </style>
     <script type="text/javascript" src="../dialogs/internal.js"></script>
     <script type="text/javascript">
 function createElement(type, name)
@@ -49,19 +52,19 @@ function createElement(type, name)
     </tr>
     <tr>
         <td colspan="2">
-            <label><input type="radio" value="progress-info" name="orgsigntype" checked /><code>表示重要信息</code></label>
+            <label class="radio"><input type="radio" value="progress-info" name="orgsigntype" checked /><code>表示重要信息</code></label>
             <div class="progress progress-info">
               <div class="bar" style="width: 20%;"></div>
             </div>
-            <label><input type="radio" value="progress-success" name="orgsigntype" /><code>表示完成情况</code></label>
+            <label class="radio"><input type="radio" value="progress-success" name="orgsigntype" /><code>表示完成情况</code></label>
             <div class="progress progress-success">
               <div class="bar" style="width: 40%;"></div>
             </div>
-            <label><input type="radio" value="progress-warning" name="orgsigntype" /><code>表示警告、提醒</code></label>
+            <label class="radio"><input type="radio" value="progress-warning" name="orgsigntype" /><code>表示警告、提醒</code></label>
             <div class="progress progress-warning">
               <div class="bar" style="width: 60%;"></div>
             </div>
-            <label><input type="radio" value="progress-danger" name="orgsigntype" /><code>表示危险、高度重视</code></label>
+            <label class="radio"><input type="radio" value="progress-danger" name="orgsigntype" /><code>表示危险、高度重视</code></label>
             <div class="progress progress-danger">
               <div class="bar" style="width: 80%;"></div>
             </div>

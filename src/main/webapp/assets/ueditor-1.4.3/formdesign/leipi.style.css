@@ -1,5 +1,4 @@
 @charset "utf-8";
-.content{}
 
 .span1,
 .span2,
@@ -102,4 +101,60 @@
 }
 .span1 {
   width: 30px;
+}
+
+/*覆盖一些css*/
+.content {
+  padding: 10px 8px 0 10px;
+}
+
+.table th, .table td {
+  padding: 6px;
+}
+
+select,
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+.uneditable-input {
+  padding: 2px 6px;
+  margin-bottom: 0;
+  font-size: 12px;
+}
+
+/* input[type="radio"],
+input[type="checkbox"] {
+  margin: 0 0 2px 0;
+} */
+
+select,
+input[type="file"] {
+  height: 26px;
+  line-height: 26px;
+}
+
+.radio.inline,
+.checkbox.inline {
+  padding-top: 0;
+}
+
+.table th,
+.table td {
+  vertical-align: middle;
+}
+
+.btn {
+  font-size: 12px;
 }

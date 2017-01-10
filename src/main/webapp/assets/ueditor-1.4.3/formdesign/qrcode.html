@@ -31,7 +31,7 @@ function createElement(type, name)
 </head>
 <body>
 <div class="content">
-    <table class="table table-bordered table-striped table-hover">
+    <table class="table table-bordered table-striped" style="margin-bottom:10px">
      <tr>
         <th><span>控件名称</span><span class="label label-important">*</span></th>
         <th><span>类型</span></th>
@@ -50,16 +50,21 @@ function createElement(type, name)
     </tr>
     <tr>
         <th><span>文本框样式</span> </th>
+        <th></th>
+    </tr>
+    <tr>
         <td>
             宽 <input id="orgwidth" type="text" value="40" class="input-small span1" placeholder="auto"/> px
             &nbsp;&nbsp;
             高 <input id="orgheight" type="text" value="40" class="input-small span1" placeholder="auto"/> px
         </td>
-       
+        <td></td>
+    </tr>
+    <tr>
+        <th colspan="2"><span>内容</span> </th>
     </tr>
     <tr>
         <td colspan="2">
-            <label for="orgvalue">内容</label>
             <textarea  class="input-block-level" rows="3" id="orgvalue" placeholder="二维码内容..."></textarea>
         </td>
     </tr>

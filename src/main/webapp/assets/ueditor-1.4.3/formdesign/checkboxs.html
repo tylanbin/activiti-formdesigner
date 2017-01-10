@@ -13,6 +13,9 @@
     <link rel="stylesheet" type="text/css" href="bootstrap/css/ie.css">
     <![endif]-->
     <link rel="stylesheet" href="leipi.style.css">
+    <style type="text/css">
+    	input[type="radio"], input[type="checkbox"] {margin: 0 0 2px 0;}
+    </style>
     <script type="text/javascript" src="../dialogs/internal.js"></script>
     <script type="text/javascript">
 function createElement(type, name)
@@ -156,22 +159,22 @@ function fnParseOptions(gChecked)
     <table class="table table-bordered table-striped">
      <tr>
         <th><span>控件名称</span><span class="label label-important">*</span></th>
-        <th><span>排列方式</span></th>
+        <th style="width:120px;"><span>排列方式</span></th>
     </tr>
     <tr>
         <td><input id="orgname" placeholder="必填项" type="text"/> </td>
         <td>
-            <label class="radio" title="选项一 选项二"><input id="orgchecked0" checked="checked" name="checked" type="radio"> 横排 </label>
-            <label class="radio" title="选项一&#10;选项二"><input id="orgchecked1" name="checked" type="radio" > 竖排 </label>
+            <input id="orgchecked0" checked="checked" name="checked" type="radio"> 横排
+            <input id="orgchecked1" name="checked" type="radio" > 竖排
         </td>
     </tr>
     <tr>
-        <td colspan="2">
-            <table class="table table-hover table-condensed" id="options_table">
+        <td colspan="2" style="padding: 0;">
+            <table class="table" id="options_table" style="margin-bottom: 0;">
                 <tr>
-                    <th>选中</th>
+                    <th style="border-left: 0">选中</th>
                     <th>选项值</th>
-                    <th>操作</th>
+                    <th style="width:120px;">操作</th>
                 </tr>
                 <!--tr>
                     <td><input type="checkbox" checked="checked"></td>
@@ -184,8 +187,11 @@ function fnParseOptions(gChecked)
                         </div>
                     </td>
                 </tr-->
-
             </table>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
             <a title="添加选项" class="btn btn-primary" onclick="fnAdd();">添加选项</a>
         </td>
     </tr>

@@ -181,6 +181,7 @@ div.edui-box {
 
 .edui-default .edui-editor-iframeholder {
     position: relative;
+    margin: 5px;
     /*for fix ie6 toolbarmsg under iframe bug. relative -> static */
     /*_position: static !important;*
 }
@@ -1235,7 +1236,7 @@ div.edui-box {
     font-weight: bold;
     font-size: 12px;
     line-height: 26px;
-    padding-left: 5px;
+    padding-left: 8px;
 }
 
 .edui-default .edui-dialog-draghandle {
@@ -1264,6 +1265,7 @@ div.edui-box {
 }
 
 .edui-default .edui-dialog-buttons {
+	margin-top: 8px;
     position: absolute;
     right: 0;
 }

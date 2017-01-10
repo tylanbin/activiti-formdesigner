@@ -7,6 +7,11 @@
     <meta name="generator" content="www.leipi.org" />
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="leipi.style.css">
+    <style type="text/css">
+		#tbl tr td, #tbl tr th {
+			text-align: center !important;
+		}
+	</style>
     <script type="text/javascript" src="../dialogs/internal.js"></script>
     <script type="text/javascript" src="../third-party/jquery-1.10.2.min.js"></script>
 <script type="text/javascript">
@@ -27,22 +32,23 @@ function createElement(type, name)
 </head>
 <body>
 <div class="content">
-    <table class="table table-striped">
-    <thead>
-        <tr>
-            <td> 
-                <span> 控件名称 ：</span> 
-                <input id="orgname" placeholder="必填项" type="text" class="input-medium" value="列表控件"/> <span class="label label-important">*</span>
-            </td>
-            <td>
-                宽 <input id="orgwidth" type="text" value="100%" class="input-small span1" placeholder="auto"/> % 或 px
-            </td>
-        </tr>
-    </thead>
-</table>
+    <table class="table table-striped" style="margin-bottom: 5px;">
+	    <thead>
+	        <tr>
+	            <td> 
+	                <span>控件名称</span>
+	                <span class="label label-important">*</span>
+	                <input id="orgname" placeholder="必填项" type="text" class="input-medium" value="列表控件"/>
+	            </td>
+	            <td>
+	               	 宽 <input id="orgwidth" type="text" value="100%" class="input-small span1" placeholder="auto"/> % 或 px
+	            </td>
+	        </tr>
+	    </thead>
+	</table>
 
 
-            <table class="table table-striped table-bordered table-condensed"  id="tbl">
+            <table class="table table-striped table-bordered" id="tbl">
                 <thead>
                     <tr>
                         <th> <span>序号</span> </th>
