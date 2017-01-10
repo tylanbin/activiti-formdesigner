@@ -1,0 +1,17 @@
+# eclipse
+.settings
+.project
+.classpath
+.mymetadata
+.myhibernatedata
+
+# java
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# maven
+target/
