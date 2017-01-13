@@ -8,5 +8,14 @@
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
+
+	<servlet>
+		<servlet-name>FormParserServlet</servlet-name>
+		<servlet-class>parser.FormParserServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FormParserServlet</servlet-name>
+		<url-pattern>/parser</url-pattern>
+	</servlet-mapping>
 	
 </web-app>

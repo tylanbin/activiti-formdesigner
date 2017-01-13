@@ -1,5 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <title>Activiti Form Designer</title>
@@ -12,141 +11,71 @@
 <script type="text/javascript" charset="utf-8" src="assets/ueditor-1.4.3/formdesign/leipi.formdesign.v4.js"></script>
 </head>
 <body>
-<form id="form" action="preview.jsp" method="post">
+<form id="form" action="parser" method="post" target="_blank">
 <div>
     <script id="editor" type="text/plain" style="width:1000px;height:500px;">
 <table data-sort="sortDisabled">
     <tbody>
         <tr class="firstRow">
-            <td valign="top">
+            <td style="word-break: break-all;" valign="top">
                 <span style="font-size: 12px;">文本框<br/></span>
             </td>
             <td valign="top">
-                <input orgtype="text" orgwidth="150" orgalign="left" style="text-align: left; width: 150px;"
-                	orghide="0" leipiplugins="text" value="" title="文本框" name="leipiNewField" type="text"/>
+                <input orgtype="text" orgwidth="150" orgalign="left" style="text-align: left; width: 150px;" orghide="0" leipiplugins="text" value="" title="文本框" name="leipiNewField" type="text"/>
             </td>
-            <td valign="top">
+            <td style="word-break: break-all;" valign="top">
                 <span style="font-size: 12px;">下拉<br/></span>
             </td>
-            <td valign="top">
-                <span style="font-size: 12px;">{|-</span>
-                <label leipiplugins="select">
-                	<select orgwidth="150" style="width: 150px;" size="1" leipiplugins="select" title="下拉" name="leipiNewField">
-                		<option selected="selected" value="111">
-                    		<span style="font-size: 12px;">111</span>
-                		</option>
-                		<option value="222">
-                    		<span style="font-size: 12px;">222</span>
-                		</option>
-                	</select>
-                </label>
-                <span style="font-size: 12px;">-|}</span>
+            <td style="word-break: break-all;" valign="top">
+                <span style="font-size: 12px;">{|-</span><label leipiplugins="select"><span style="font-size: 12px;">&nbsp;</span><select orgwidth="150" style="width: 150px;" size="1" leipiplugins="select" title="下拉" name="leipiNewField"><option selected="selected" value="AAA">
+                    <span style="font-size: 12px;">AAA</span>
+                </option>
+                <option value="BBB">
+                    <span style="font-size: 12px;">BBB</span>
+                </option>
+                <option value="CCC">
+                    <span style="font-size: 12px;">CCC</span>
+                </option></select><span style="font-size: 12px;">&nbsp;</span></label><span style="font-size: 12px;">-|}</span>
             </td>
         </tr>
         <tr>
-            <td valign="top">
+            <td style="word-break: break-all;" valign="top">
                 <span style="font-size: 12px;">单选<br/></span>
             </td>
-            <td valign="top">
-                <span style="font-size: 12px;">{|-</span>
-                <label leipiplugins="radios" title="单选">
-                	<input name="leipiNewField" value="1" type="radio"/>
-                	<span style="font-size: 12px;">1&nbsp;</span>
-                	<input name="leipiNewField" value="2" checked="checked" type="radio"/>
-                	<span style="font-size: 12px;">2&nbsp;</span>
-                	<input name="leipiNewField" value="3" type="radio"/>
-                	<span style="font-size: 12px;">3&nbsp;</span>
-                </label>
-                <span style="font-size: 12px;">-|}</span>
+            <td style="word-break: break-all;" valign="top">
+                <span style="font-size: 12px;">{|-</span><label leipiplugins="radios" title="单选" name="leipiNewField"><input name="leipiNewField" value="A" type="radio"/><span style="font-size: 12px;">A&nbsp;</span><input name="leipiNewField" value="B" checked="" type="radio"/><span style="font-size: 12px;">B&nbsp;</span><input name="leipiNewField" value="C" type="radio"/><span style="font-size: 12px;">C&nbsp;</span></label><span style="font-size: 12px;">-|}</span>
             </td>
-            <td valign="top">
+            <td style="word-break: break-all;" valign="top">
                 <span style="font-size: 12px;">复选<br/></span>
             </td>
             <td valign="top">
-                <span style="font-size: 12px;">{|-</span>
-                <label leipiplugins="checkboxs" title="复选">
-                	<input name="leipiNewField" value="1" checked="checked" type="checkbox"/>
-                	<span style="font-size: 12px;">1&nbsp;</span>
-                	<input name="leipiNewField" value="2" type="checkbox"/>
-                	<span style="font-size: 12px;">2&nbsp;</span>
-                	<input name="leipiNewField" value="3" checked="checked" type="checkbox"/>
-                	<span style="font-size: 12px;">3&nbsp;</span>
-                </label>
-                <span style="font-size: 12px;">-|}</span>
+                <span style="font-size: 12px;">{|-</span><label leipiplugins="checkboxs" title="复选"><input name="leipiNewField" value="1" checked="checked" type="checkbox"/><span style="font-size: 12px;">1&nbsp;</span><input name="leipiNewField" value="2" type="checkbox"/><span style="font-size: 12px;">2&nbsp;</span><input name="leipiNewField" value="3" checked="checked" type="checkbox"/><span style="font-size: 12px;">3&nbsp;</span></label><span style="font-size: 12px;">-|}</span>
             </td>
         </tr>
         <tr>
-            <td valign="top">
+            <td style="word-break: break-all;" valign="top">
                 <span style="font-size: 12px;">宏<br/></span>
             </td>
-            <td valign="top">
-                <input orgwidth="150" style="width: 150px;" orghide="0" orgtype="sys_datetime"
-                	leipiplugins="macros" title="时间" value="{macros}" name="leipiNewField" type="text"/>
+            <td style="word-break: break-all;" valign="top">
+                <input orgwidth="150" style="width: 150px;" orghide="0" orgtype="sys_datetime" leipiplugins="macros" title="宏" value="" name="leipiNewField" type="text"/>
             </td>
-            <td valign="top"></td>
+            <td style="word-break: break-all;" valign="top"></td>
             <td valign="top"></td>
         </tr>
         <tr>
-            <td rowspan="1" colspan="1" valign="top">
-                <span style="font-size: 12px;">文本域<br/></span>
+            <td style="word-break: break-all;" valign="top">
+                <span style="font-size: 12px;">多行框<br/></span>
             </td>
-            <td rowspan="1" colspan="3" valign="top">
-                <textarea title="文本域" name="leipiNewField" leipiplugins="textarea" value=""
-                	orgrich="0" orgfontsize="" orgwidth="300" orgheight="80" style="width:300px;height:80px;"></textarea>
+            <td colspan="3" rowspan="1" valign="top">
+                <textarea title="多行框" name="leipiNewField" leipiplugins="textarea" value="" orgrich="0" orgfontsize="" orgwidth="300" orgheight="80" style="width:300px;height:80px;"></textarea><span style="font-size: 12px;"></span>
             </td>
         </tr>
         <tr>
-            <td rowspan="1" colspan="1" valign="top">
-                <span style="font-size: 12px;">二维表<br/></span>
+            <td style="word-break: break-all;" valign="top">
+                <span style="font-size: 12px;">列表<br/></span>
             </td>
-            <td rowspan="1" colspan="3" valign="top">
-                <input type="text" name="leipiNewField" title="列表控件" value="{列表控件}" readonly="readonly" style="width: 100%;"
-					leipiplugins="listctrl" orgwidth="100%" orgtitle="aaa`sss`ddd`" orgcoltype="text`textarea`text`" orgunit="1`2`3`" orgcolvalue=" `123321` `" />
-            </td>
-        </tr>
-    </tbody>
-</table>
-<table data-sort="sortDisabled">
-    <tbody>
-        <tr class="firstRow">
-            <td valign="top">
-                <span style="font-size: 12px;">Field1<br/></span>
-            </td>
-            <td valign="top">
-                <input orgtype="text" orgwidth="150" orgalign="left" style="text-align: left; width: 150px;" data-cell="F1452839733401"
-                	orghide="0" leipiplugins="text" value="" title="Field1" name="leipiNewField" type="text"/>
-            </td>
-            <td valign="top">
-                <span style="font-size: 12px;">Field2<br/></span>
-            </td>
-            <td valign="top">
-                <input orgtype="text" orgwidth="150" orgalign="left" style="text-align: left; width: 150px;" data-cell="F1452839733402"
-                	orghide="0" leipiplugins="text" value="" title="Field2" name="leipiNewField" type="text"/>
-            </td>
-        </tr>
-		<tr>
-            <td valign="top">
-                <span style="font-size: 12px;">Field3<br/></span>
-            </td>
-            <td valign="top">
-                <input orgtype="text" orgwidth="150" orgalign="left" style="text-align: left; width: 150px;" data-cell="F1452839733403"
-                	orghide="0" leipiplugins="text" value="" title="Field3" name="leipiNewField" type="text"/>
-            </td>
-            <td valign="top">
-                <span style="font-size: 12px;">Field4<br/></span>
-            </td>
-            <td valign="top">
-                <input orgtype="text" orgwidth="150" orgalign="left" style="text-align: left; width: 150px;" data-cell="F1452839733404"
-                	orghide="0" leipiplugins="text" value="" title="Field4" name="leipiNewField" type="text"/>
-            </td>
-        </tr>
-		<tr>
-            <td valign="top">
-                <span style="font-size: 12px;">Result<br/></span>
-            </td>
-            <td valign="top" colspan="3">
-                <input orgtype="text" orgwidth="150" orgalign="left" style="text-align: left; width: 150px;" data-cell="F1452839733405"
-                	orghide="0" leipiplugins="text" value="" title="Result" name="leipiNewField" type="text"/>
+            <td colspan="3" rowspan="1" valign="top">
+                <input orgwidth="100%" style="width: 100%;" orgcolvalue="```" orgsum="0`0`0`" orgunit="g`kg`m`" orgcoltype="text`text`text`" orgtitle="Col1`Col2`Col3`" title="列表" readonly="readonly" value="{列表控件}" leipiplugins="listctrl" name="leipiNewField" type="text"/>
             </td>
         </tr>
     </tbody>
@@ -159,7 +88,7 @@
 <script type="text/javascript">
 	var leipiEditor = UE.getEditor("editor", {
 		toolleipi : true,// 是否显示，设计器的 toolbars
-		textarea : 'design_content',
+		textarea : 'content',
 		// 这里可以选择自己需要的工具按钮名称
 		toolbars : [['fullscreen', 'source', '|', 'undo', 'redo', '|',
 		             'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'removeformat', '|',
@@ -388,21 +317,18 @@
 				return false;
 			}
 		},
-		/* 预览表单 */
+		// 预览表单
 		fnReview : function() {
-			if (leipiEditor.queryCommandState('source'))
-				leipiEditor.execCommand('source');/* 切换到编辑模式才提交，否则部分浏览器有bug */
+			if (leipiEditor.queryCommandState('source')) {
+				// 切换到编辑模式才提交，否则部分浏览器有bug
+				leipiEditor.execCommand('source');
+			}
 			if (leipiEditor.hasContents()) {
-				leipiEditor.sync(); /* 同步内容 */
-				alert("你点击了预览,请自行处理....");
+				// 同步内容
+				leipiEditor.sync();
+				// 提交预览的form到新页面
+				$('#form').submit();
 				return false;
-				
-				// --------------以下仅参考-------------------------------------------------------------------
-				/* 设计form的target 然后提交至一个新的窗口进行预览 */
-				document.saveform.target = "mywin";
-				window.open('', 'mywin', "menubar=0,toolbar=0,status=0,resizable=1,left=0,top=0,scrollbars=1,width=" + (screen.availWidth - 10) + ",height=" + (screen.availHeight - 50) + "\"");
-				document.saveform.action = "/index.php?s=/index/preview.html";
-				document.saveform.submit(); // 提交表单
 			} else {
 				alert('表单内容不能为空！');
 				return false;

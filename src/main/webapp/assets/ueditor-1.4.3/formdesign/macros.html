@@ -43,22 +43,17 @@ function createElement(type, name)
             </td>
             <td>
                 <select  id="orgtype" class="span7">
-                    <optgroup label="----常用日期宏控件----">
-                        <option value="sys_datetime">当前日期+时间 [ 1997-01-01 12:30 ]</option>
+                    <!-- <optgroup label="----常用日期宏控件----"> -->
+                        <option value="sys_time">当前日期+时间 [ 1997-01-01 12:30 ]</option>
                         <option value="sys_date">当前日期 [ 1997-01-01 ]</option>
-                        <option value="sys_date_cn">当前日期 [ 1997年1月1日 ]</option>
-                        <option value="sys_date_cn_short1">当前日期 [ 1997年1月 ]</option>
-                        <option value="sys_date_cn_short4">当前年份 [ 1997 ]</option>
-                        <option value="sys_date_cn_short3">当前年份 [ 1997年 ]</option>
-                        <option value="sys_date_cn_short2">当前日期 [ 1月1日 ]</option>
-                        <option value="sys_time">当前时间 [ 12:30 ]</option>
-                        <option value="sys_week">当前星期 [ 星期一 ]</option>
-                    </optgroup>
+                        <option value="sys_month">当前年月 [ 1997-01 ]</option>
+                        <option value="sys_year">当前年份 [ 1997 ]</option>
+                    <!-- </optgroup>
                     <optgroup label="----扩展定义----">
                         <option value="sys_userid">当前用户ID，如 9527</option>
                         <option value="sys_realname">当前用户姓名，如 唐伯虎</option>
                         <option value="sys_dept">当前用户部门，如 华府</option>
-                    </optgroup>
+                    </optgroup> -->
                 </select>
             </td>
         </tr>
@@ -125,7 +120,7 @@ dialog.onok = function (){
                 }*/
                 oNode = createElement('input','leipiNewField');
                 oNode.setAttribute('type','text');
-                oNode.setAttribute('value','{macros}');
+                oNode.setAttribute('value','');
                 
                 oNode.setAttribute('title',gTitle);
                 oNode.setAttribute('name','leipiNewField');
