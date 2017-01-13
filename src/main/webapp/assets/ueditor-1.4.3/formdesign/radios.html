@@ -253,9 +253,9 @@ dialog.onok = function (){
                 return false;
             }
             //{|- 使用边界，防止用户删除了span标签
-            var html = '{|-<span leipiplugins="radios" title="'+gTitle+'" name="leipiNewField">';
+            var html = '{|-<label leipiplugins="radios" title="'+gTitle+'" name="leipiNewField">';
                 html +=options;
-                html +='</span>-|}';
+                html +='</label>-|}';
             editor.execCommand('insertHtml',html);
             return true ;
         } catch ( e ) {

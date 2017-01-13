@@ -369,7 +369,7 @@ UE.plugins['radios'] = function () {
         evt = evt || window.event;
         var el = evt.target || evt.srcElement;
         var leipiPlugins = el.getAttribute('leipiplugins');
-        if ( /span/ig.test( el.tagName ) && leipiPlugins==thePlugins) {
+        if ( /label/ig.test( el.tagName ) && leipiPlugins==thePlugins) {
             var html = popup.formatHtml(
                 '<nobr>单选框组: <span onclick=$$._edittext() class="edui-clickable">编辑</span>&nbsp;&nbsp;<span onclick=$$._delete() class="edui-clickable">删除</span></nobr>' );
             if ( html ) {
@@ -445,7 +445,7 @@ UE.plugins['checkboxs'] = function () {
         evt = evt || window.event;
         var el = evt.target || evt.srcElement;
         var leipiPlugins = el.getAttribute('leipiplugins');
-        if ( /span/ig.test( el.tagName ) && leipiPlugins==thePlugins) {
+        if ( /label/ig.test( el.tagName ) && leipiPlugins==thePlugins) {
             var html = popup.formatHtml(
                 '<nobr>复选框组: <span onclick=$$._edittext() class="edui-clickable">编辑</span>&nbsp;&nbsp;<span onclick=$$._delete() class="edui-clickable">删除</span></nobr>' );
             if ( html ) {
@@ -594,7 +594,7 @@ UE.plugins['select'] = function () {
         evt = evt || window.event;
         var el = evt.target || evt.srcElement;
         var leipiPlugins = el.getAttribute('leipiplugins');
-        if ( /select|span/ig.test( el.tagName ) && leipiPlugins==thePlugins) {
+        if ( /select|label/ig.test( el.tagName ) && leipiPlugins==thePlugins) {
             var html = popup.formatHtml(
                 '<nobr>下拉菜单: <span onclick=$$._edittext() class="edui-clickable">编辑</span>&nbsp;&nbsp;<span onclick=$$._delete() class="edui-clickable">删除</span></nobr>' );
             if ( html ) {

@@ -248,9 +248,9 @@ dialog.onok = function (){
                 return false;
             }
             //{|- 使用边界，防止用户删除了span标签，程序处理要把边界替换为空
-            var html = '{|-<span leipiplugins="checkboxs" title="'+gTitle+'">';
+            var html = '{|-<label leipiplugins="checkboxs" title="'+gTitle+'">';
                 html +=options;
-                html +='</span>-|}';
+                html +='</label>-|}';
             editor.execCommand('insertHtml',html);
             return true ;
         } catch ( e ) {
