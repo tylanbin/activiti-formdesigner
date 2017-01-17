@@ -156,6 +156,75 @@ UE.plugins['macros'] = function () {
         }
     });
 };
+
+/**
+ * 时间控件
+ * @author lanbin
+ */
+UE.plugins['date'] = function () {
+    var me = this,thePlugins = 'date';
+    me.commands[thePlugins] = {
+        execCommand:function () {
+            var dialog = new UE.ui.Dialog({
+                iframeUrl:this.options.UEDITOR_HOME_URL + UE.leipiFormDesignUrl+'/date.html',
+                name:thePlugins,
+                editor:this,
+                title: '时间控件',
+                cssRules:"width:600px;height:270px;",
+                buttons:[
+                {
+                    className:'edui-okbutton',
+                    label:'确定',
+                    onclick:function () {
+                        dialog.close(true);
+                    }
+                },
+                {
+                    className:'edui-cancelbutton',
+                    label:'取消',
+                    onclick:function () {
+                        dialog.close(false);
+                    }
+                }]
+            });
+            dialog.render();
+            dialog.open();
+        }
+    };
+    var popup = new baidu.editor.ui.Popup( {
+        editor:this,
+        content: '',
+        className: 'edui-bubble',
+        _edittext: function () {
+              baidu.editor.plugins[thePlugins].editdom = popup.anchorEl;
+              me.execCommand(thePlugins);
+              this.hide();
+        },
+        _delete:function(){
+            if( window.confirm('确认删除该控件吗？') ) {
+                baidu.editor.dom.domUtils.remove(this.anchorEl,false);
+            }
+            this.hide();
+        }
+    } );
+    popup.render();
+    me.addListener( 'mouseover', function( t, evt ) {
+        evt = evt || window.event;
+        var el = evt.target || evt.srcElement;
+        var leipiPlugins = el.getAttribute('leipiplugins');
+        if ( /input/ig.test( el.tagName ) && leipiPlugins==thePlugins) {
+            var html = popup.formatHtml(
+                '<nobr>时间控件: <span onclick=$$._edittext() class="edui-clickable">编辑</span>&nbsp;&nbsp;<span onclick=$$._delete() class="edui-clickable">删除</span></nobr>' );
+            if ( html ) {
+                popup.getDom( 'content' ).innerHTML = html;
+                popup.anchorEl = el;
+                popup.showAnchor( popup.anchorEl );
+            } else {
+                popup.hide();
+            }
+        }
+    });
+};
 /**
  * 单选框
  * @command radio
@@ -893,7 +962,7 @@ UE.plugins['leipi'] = function () {
                 name:thePlugins,
                 editor:this,
                 title: '表单设计器 - 清单',
-                cssRules:"width:540px;height:220px;",
+                cssRules:"width:540px;height:260px;",
                 buttons:[
                 {
                     className:'edui-okbutton',

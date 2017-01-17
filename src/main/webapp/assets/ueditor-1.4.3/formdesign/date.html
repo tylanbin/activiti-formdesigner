@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <title>宏控件</title>
+    <title>时间控件</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" >
     <meta name="generator" content="www.leipi.org" />
@@ -43,17 +43,17 @@ function createElement(type, name)
             </td>
             <td>
                 <select  id="orgtype" class="span7">
-                    <optgroup label="--当前时间类--">
-                        <option value="sys_time">当前日期+时间 [ 1997-01-01 12:30 ]</option>
-                        <option value="sys_date">当前日期 [ 1997-01-01 ]</option>
-                        <option value="sys_month">当前年月 [ 1997-01 ]</option>
-                        <option value="sys_year">当前年份 [ 1997 ]</option>
-                    </optgroup>
-                    <optgroup label="--系统变量类--">
-                        <option value="sys_uid">当前用户ID</option>
-                        <option value="sys_name">当前用户姓名</option>
-                        <option value="sys_dept">当前用户部门</option>
-                    </optgroup>
+                    <!-- <optgroup label="----常用日期宏控件----"> -->
+                        <option value="sys_time">日期+时间 [ 1997-01-01 12:30 ]</option>
+                        <option value="sys_date">日期 [ 1997-01-01 ]</option>
+                        <option value="sys_month">年月 [ 1997-01 ]</option>
+                        <option value="sys_year">年份 [ 1997 ]</option>
+                    <!-- </optgroup>
+                    <optgroup label="----扩展定义----">
+                        <option value="sys_userid">当前用户ID，如 9527</option>
+                        <option value="sys_realname">当前用户姓名，如 唐伯虎</option>
+                        <option value="sys_dept">当前用户部门，如 华府</option>
+                    </optgroup> -->
                 </select>
             </td>
         </tr>
@@ -79,7 +79,7 @@ function createElement(type, name)
     </table>
 </div>
 <script type="text/javascript">
-var oNode = null,thePlugins = 'macros';
+var oNode = null,thePlugins = 'date';
 window.onload = function() {
     if( UE.plugins[thePlugins].editdom ) {
         oNode = UE.plugins[thePlugins].editdom;
@@ -161,7 +161,7 @@ dialog.onok = function (){
         }*/
         oNewNode = createElement('input','leipiNewField');
         oNewNode.setAttribute('type','text');
-        oNewNode.setAttribute('value','{macros}');
+        oNewNode.setAttribute('value','');
         oNewNode.setAttribute('title',gTitle);
         oNewNode.setAttribute('name',norgname);
         oNewNode.setAttribute('leipiPlugins',thePlugins ); 

@@ -99,8 +99,8 @@ public class FormParserServlet extends HttpServlet {
 						.replaceAll("label", "span")
 						// 处理select的name
 						.replaceAll("name=\"(.?|.+?)\"", "name=\"" + uuid + "\"");
-			} else if ("macros".equals(type)) {
-				// 宏控件
+			} else if ("date".equals(type)) {
+				// 时间控件
 				String orgtype = map_attrs.get("orgtype");
 				String fmt = "yyyy-MM-dd HH:mm";
 				if ("sys_time".equals(orgtype)) {
@@ -114,6 +114,10 @@ public class FormParserServlet extends HttpServlet {
 				}
 				html_new = widget
 						.replaceAll("leipiplugins=\"(.?|.+?)\"", "class=\"Wdate\" onfocus=\"WdatePicker({dateFmt:'" + fmt + "',lang:'zh-cn'})\"")
+						.replaceAll("name=\"(.?|.+?)\"", "name=\"" + uuid + "\"");
+			} else if ("macros".equals(type)) {
+				// 宏控件（该控件需要在表单使用时才能处理）
+				html_new = widget
 						.replaceAll("name=\"(.?|.+?)\"", "name=\"" + uuid + "\"");
 			} else if ("listctrl".equals(type)) {
 				// 列表控件
