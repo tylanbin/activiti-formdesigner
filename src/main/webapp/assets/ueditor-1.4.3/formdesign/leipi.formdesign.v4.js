@@ -849,7 +849,7 @@ UE.plugins['listctrl'] = function () {
                 name:thePlugins,
                 editor:this,
                 title: '列表控件',
-                cssRules:"width:800px;height:400px;",
+                cssRules:"width:560px;height:420px;",
                 buttons:[
                 {
                     className:'edui-okbutton',

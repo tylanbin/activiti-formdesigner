@@ -19,6 +19,8 @@ import org.apache.commons.lang3.StringUtils;
 import util.UuidUtils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 @SuppressWarnings("serial")
 public class FormParserServlet extends HttpServlet {
@@ -35,15 +37,18 @@ public class FormParserServlet extends HttpServlet {
 		String content = request.getParameter("content");
 		// 处理数据
 		String html = "";
+		String json = "";
 		try {
 			if (!StringUtils.isEmpty(content)) {
 				Map<String, String> map = generateForm(content);
 				html = map.get("genHtml");
+				json = map.get("genJson");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		request.setAttribute("html", html);
+		request.setAttribute("json", json);
 		// 跳转页面
 		String context = request.getContextPath() + "/";
 		request.getRequestDispatcher(context + "view.jsp").forward(request, response);
@@ -52,7 +57,9 @@ public class FormParserServlet extends HttpServlet {
 	public Map<String, String> generateForm(String html) throws Exception {
 		// 需要处理的属性名
 		List<String> list = Arrays.asList(new String[] {
-			"leipiplugins", "title", "orgtype"
+			"leipiplugins", "title", "orgtype",
+			// 列表控件需要的属性名
+			"orgtitle", "orgcolwidth", "orgcolvalue"
 		});
 		ObjectMapper om = new ObjectMapper();
 		Map<String, String> map = new HashMap<String, String>();// 用于返回结果
@@ -120,9 +127,63 @@ public class FormParserServlet extends HttpServlet {
 				html_new = widget
 						.replaceAll("name=\"(.?|.+?)\"", "name=\"" + uuid + "\"");
 			} else if ("listctrl".equals(type)) {
-				// 列表控件
-				// TODO: 待处理
-				html_new = widget;
+				// 列表控件（使用.split("`", -1)以保留最后的空值）
+				String[] titles = map_attrs.get("orgtitle").split("`", -1);
+				String[] widths = map_attrs.get("orgcolwidth").split("`", -1);
+				String[] values = map_attrs.get("orgcolvalue").split("`", -1);
+				// 构造表格
+				StringBuffer sb = new StringBuffer("<table id=\"" + uuid + "\" title=\"" + title + "\" class=\"listctrl\">");
+				// 表格的头部分
+				sb.append("<thead>");
+				// 加入添加行的按钮
+				sb.append("<tr><th colspan=\"" + (titles.length + 1) + "\" style=\"text-align:right;\">" + "<button onclick=\"listctrl_row_add('#" + uuid + "')\">添加一行</button></th></tr>");
+				// 生成表头
+				sb.append("<tr>");
+				for (int i = 0; i < titles.length; i++) {
+					sb.append("<th>" + titles[i] + "</th>");
+				}
+				sb.append("<th>操作</th>");
+				sb.append("</tr>");
+				sb.append("</thead>");
+				// 预置一行作为模板，用于添加行时参考
+				sb.append("<tbody>");
+				// 存储一个list，用于存储该二维表的各列属性
+				ArrayNode arr = om.createArrayNode();
+				sb.append("<tr class=\"template\" style=\"display: none;\">");
+				for (int i = 0; i < titles.length; i++) {
+					// 每列都生成新的name
+					String name = UuidUtils.base58Uuid();
+					sb.append("<td><input type=\"text\" name=\"" + name + "\" value=\"" + values[i].trim() + "\" style=\"width:" + widths[i].trim() + "px;\"/></td>");
+					// 构造每列属性的json对象
+					ObjectNode obj = om.createObjectNode();
+					obj.put("name", name);
+					obj.put("title", titles[i]);
+					obj.put("width", widths[i]);
+					obj.put("defaultVal", values[i].trim());
+					arr.add(obj);
+				}
+				sb.append("<td><a class=\"btn-row-del\" href=\"javascript:;\" onclick=\"listctrl_row_del('#" + uuid + "', this)\">删除本行</a></td>");
+				sb.append("</tr></tbody>");
+				
+				// 这里需要一个hidden来存储一个json，用于保存二维表的属性结构，用于动态增删行操作
+				ObjectNode props = om.createObjectNode();
+				props.put("id", uuid);
+				props.put("cols", arr);
+				// 为了与生成的json的双引号进行区分，注意value两侧是'
+				sb.append("<input id=\"" + uuid + "_prop\" class=\"listctrl_prop\" type=\"hidden\" value='" + om.writeValueAsString(props) + "' />");
+				// 此外还需要一个hidden用于记录二维表的行数，记录的行数会在查看历史数据时使用
+				sb.append("<input id=\"" + uuid + "_rows\" class=\"listctrl_rows\" type=\"hidden\" name=\"" + uuid + "_rows\" value=\"0\" />");
+				
+				sb.append("</table>");
+				html_new = sb.toString();
+				
+				// 特殊处理列表控件的json
+				Map<String, Object> listctrl = new HashMap<String, Object>();
+				listctrl.put("formproperty_id", uuid);
+				listctrl.put("formproperty_type", "listctrl");
+				listctrl.put("formproperty_name", title);
+				listctrl.put("formproperty_prop", arr);
+				json.add(listctrl);
 			} else {
 				// 其他标签仅需要替换name即可
 				html_new = widget
@@ -131,13 +192,18 @@ public class FormParserServlet extends HttpServlet {
 			// 最后将整个html标签进行替换
 			if (!StringUtils.isEmpty(html_new)) {
 				html = html.replace(widget, html_new);
-				json.add(packageMap(uuid, "string", title));
+				if ("listctrl".equals(type)) {
+					// 列表控件不作为普通控件记录
+				} else {
+					json.add(packageMap(uuid, "string", title));
+				}
 			}
 		}
 		// 标记处理
 		html = html.replaceAll("\\{\\|-", "").replaceAll("-\\|\\}", "");
 		map.put("genHtml", html);
 		map.put("genJson", om.writeValueAsString(json));
+		// System.out.println(om.writerWithDefaultPrettyPrinter().writeValueAsString(json));
 		return map;
 	}
 	

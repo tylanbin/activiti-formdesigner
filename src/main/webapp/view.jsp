@@ -26,10 +26,14 @@
 		border-width: 0 1px 1px 0;
 		border-style: dotted;
 		vertical-align: middle;
+		text-align: center;
 		height: 26px;
 		padding: 2px 3px;
 		min-width: 60px;
 		word-break: keep-all;
+	}
+	.listctrl {
+		font-size: 12px;
 	}
 </style>
 <script type="text/javascript">
@@ -80,9 +84,34 @@
 			})
 		})
 	})
+	// 列表的处理方法（可以提取出一个js文件）
+	function listctrl_row_add(id) {
+		// 增加行
+		$(id + ' tbody .template').clone(true)
+			.removeClass('template')
+			.find('.btn-row-del').show().end()
+			.find('input').end()
+			.appendTo($(id + ' tbody'));
+		$(id + ' tbody tr:last').show();
+		// 更新行记录
+		var count = parseInt($(id + '_rows').val());
+		$(id + '_rows').val(count + 1);
+	}
+	function listctrl_row_del(id, btn) {
+		// 删除本行
+		$(btn).parent().parent().remove();
+		// 更新二维表的行记录数
+		// 更新行记录
+		var count = parseInt($(id + '_rows').val());
+		$(id + '_rows').val(count - 1);
+	}
 </script>
 </head>
 <body>
-	${html}
+	<div>${html}</div>
+	<div style="text-align: center;">
+		<button onclick="alert($('#json').val())">查看JSON</button>
+		<input type="hidden" id="json" value='${json }' />
+	</div>
 </body>
 </html>
