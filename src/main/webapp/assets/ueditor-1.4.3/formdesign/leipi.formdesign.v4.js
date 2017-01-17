@@ -962,7 +962,7 @@ UE.plugins['leipi'] = function () {
                 name:thePlugins,
                 editor:this,
                 title: '表单设计器 - 清单',
-                cssRules:"width:540px;height:260px;",
+                cssRules:"width:540px;height:200px;",
                 buttons:[
                 {
                     className:'edui-okbutton',
