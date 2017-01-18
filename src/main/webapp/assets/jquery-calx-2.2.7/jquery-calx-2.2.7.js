@@ -2605,7 +2605,10 @@ date: {
         if(typeof (moment) == 'undefined'){
             return data.ERRKEY.momentRequired;
         }
-
+		if(typeof (date) == 'string'){
+			// 字符串参数兼容
+            date = moment(date);
+        }
         return moment(new Date(date)).date();
     },
 
@@ -2679,7 +2682,10 @@ date: {
         if(typeof (moment) == 'undefined'){
             return data.ERRKEY.momentRequired;
         }
-
+		if(typeof (date) == 'string'){
+			// 字符串参数兼容
+            date = moment(date);
+        }
         return (timestamp <= 1) ? Math.floor(24 * timestamp) : moment(new Date(timestamp)).hours();
     },
 
@@ -2687,7 +2693,10 @@ date: {
         if(typeof (moment) == 'undefined'){
             return data.ERRKEY.momentRequired;
         }
-
+		if(typeof (date) == 'string'){
+			// 字符串参数兼容
+            date = moment(date);
+        }
         return (timestamp <= 1) ? Math.floor(24 * 60 * timestamp) - 60 * Math.floor(24 * timestamp) : moment(new Date(timestamp)).minutes();
     },
 
@@ -2703,7 +2712,10 @@ date: {
         if(typeof (moment) == 'undefined'){
             return data.ERRKEY.momentRequired;
         }
-
+		if(typeof (date) == 'string'){
+			// 字符串参数兼容
+            date = moment(date);
+        }
         return moment(new Date(timestamp)).month() + 1;
     },
 
@@ -2745,14 +2757,19 @@ date: {
     },
 
     NOW : function() {
-        return new Date();
+    	// 默认使用字符串
+    	var d = moment(new Date());
+        return '' + d.format('YYYY-MM-DD HH:mm:ss');
     },
 
     SECOND : function(timestamp) {
         if(typeof (moment) == 'undefined'){
             return data.ERRKEY.momentRequired;
         }
-
+		if(typeof (timestamp) == 'string'){
+			// 字符串参数兼容
+            timestamp = moment(timestamp);
+        }
         return moment(new Date(timestamp)).seconds();
     },
 
@@ -2777,7 +2794,10 @@ date: {
         if(typeof (moment) == 'undefined'){
             return data.ERRKEY.momentRequired;
         }
-
+		if(typeof (timestamp) == 'string'){
+			// 字符串参数兼容
+            timestamp = moment(timestamp);
+        }
         var week_day = moment(new Date(date)).format('d');
         var week_type = (typeof type === 'undefined') ? 1 : type;
         return data.WEEK_TYPES[week_type][week_day];
@@ -2836,7 +2856,10 @@ date: {
         if(typeof (moment) == 'undefined'){
             return data.ERRKEY.momentRequired;
         }
-
+		if(typeof (timestamp) == 'string'){
+			// 字符串参数兼容
+            timestamp = moment(timestamp);
+        }
         return moment(new Date(date)).year();
     },
 
