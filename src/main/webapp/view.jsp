@@ -10,6 +10,9 @@
 <script type="text/javascript" charset="utf-8" src="assets/js.Date.js"></script>
 <script type="text/javascript" charset="utf-8" src="assets/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="assets/My97DatePicker/WdatePicker.js"></script>
+<!-- 用于进行公式计算 -->
+<script type="text/javascript" src="assets/jquery-calx-2.2.7/js/moment.min.js"></script>
+<script type="text/javascript" src="assets/jquery-calx-2.2.7/jquery-calx-2.2.7.js"></script>
 <style type="text/css">
 	body {
 		font-size: 12px;
@@ -81,8 +84,13 @@
 				// 设置值，并修改为只读
 				$(input).val(val);
 				$(input).attr('readonly', 'readonly');
-			})
-		})
+			});
+		});
+		// 处理添加了公式的文本框
+		$('#fm').calx({
+			autoCalculate : true,// 自动计算
+			autoCalculateTrigger : 'keyup'// 按键抬起时自动计算
+		});
 	})
 	// 列表的处理方法（可以提取出一个js文件）
 	function listctrl_row_add(id) {
@@ -108,7 +116,7 @@
 </script>
 </head>
 <body>
-	<div>${html}</div>
+	<form id="fm">${html}</form>
 	<div style="text-align: center;">
 		<button onclick="alert($('#json').val())">查看JSON</button>
 		<input type="hidden" id="json" value='${json }' />

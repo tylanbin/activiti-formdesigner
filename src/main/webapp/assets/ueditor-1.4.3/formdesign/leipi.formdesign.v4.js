@@ -27,7 +27,7 @@ UE.plugins['text'] = function () {
 				name:thePlugins,
 				editor:this,
 				title: '文本框',
-				cssRules:"width:600px;height:310px;",
+				cssRules:"width:600px;height:250px;",
 				buttons:[
 				{
 					className:'edui-okbutton',
@@ -53,14 +53,20 @@ UE.plugins['text'] = function () {
 		content: '',
 		className: 'edui-bubble',
 		_edittext: function () {
-			  baidu.editor.plugins[thePlugins].editdom = popup.anchorEl;
-			  me.execCommand(thePlugins);
-			  this.hide();
+			baidu.editor.plugins[thePlugins].editdom = popup.anchorEl;
+			me.execCommand(thePlugins);
+			this.hide();
 		},
-		_delete:function(){
+		_delete: function(){
 			if( window.confirm('确认删除该控件吗？') ) {
 				baidu.editor.dom.domUtils.remove(this.anchorEl,false);
 			}
+			this.hide();
+		},
+		_calx: function () {
+			// 用于进行公式设计的入口
+			baidu.editor.plugins['calx'].editdom = popup.anchorEl;
+			me.execCommand('calx');
 			this.hide();
 		}
 	} );
@@ -71,7 +77,7 @@ UE.plugins['text'] = function () {
         var leipiPlugins = el.getAttribute('leipiplugins');
 		if ( /input/ig.test( el.tagName ) && leipiPlugins==thePlugins) {
 			var html = popup.formatHtml(
-				'<nobr>文本框: <span onclick=$$._edittext() class="edui-clickable">编辑</span>&nbsp;&nbsp;<span onclick=$$._delete() class="edui-clickable">删除</span></nobr>' );
+				'<nobr>文本框: <span onclick=$$._edittext() class="edui-clickable">编辑</span>&nbsp;&nbsp;<span onclick=$$._delete() class="edui-clickable">删除</span>&nbsp;&nbsp;<span onclick=$$._calx() class="edui-clickable">公式</span></nobr>' );
 			if ( html ) {
 				popup.getDom( 'content' ).innerHTML = html;
 				popup.anchorEl = el;
@@ -81,6 +87,38 @@ UE.plugins['text'] = function () {
 			}
 		}
 	});
+};
+/**
+ * 文本框的公式
+ */
+UE.plugins['calx'] = function() {
+	var me = this, thePlugins = 'calx';
+	me.commands[thePlugins] = {
+		execCommand : function() {
+			var dialog = new UE.ui.Dialog({
+				iframeUrl : this.options.UEDITOR_HOME_URL + UE.leipiFormDesignUrl + '/calx.html',
+				name : thePlugins,
+				editor : this,
+				title : '公式设计器',
+				cssRules : "width:610px;height:320px;",
+				buttons : [{
+					className : 'edui-okbutton',
+					label : '确定',
+					onclick : function() {
+						dialog.close(true);
+					}
+				}, {
+					className : 'edui-cancelbutton',
+					label : '取消',
+					onclick : function() {
+						dialog.close(false);
+					}
+				}]
+			});
+			dialog.render();
+			dialog.open();
+		}
+	};
 };
 /**
  * 宏控件
@@ -101,7 +139,7 @@ UE.plugins['macros'] = function () {
                 name:thePlugins,
                 editor:this,
                 title: '宏控件',
-                cssRules:"width:600px;height:270px;",
+                cssRules:"width:600px;height:180px;",
                 buttons:[
                 {
                     className:'edui-okbutton',
@@ -170,7 +208,7 @@ UE.plugins['date'] = function () {
                 name:thePlugins,
                 editor:this,
                 title: '时间控件',
-                cssRules:"width:600px;height:270px;",
+                cssRules:"width:600px;height:180px;",
                 buttons:[
                 {
                     className:'edui-okbutton',
@@ -396,7 +434,7 @@ UE.plugins['radios'] = function () {
                 name:thePlugins,
                 editor:this,
                 title: '单选框组',
-                cssRules:"width:590px;height:370px;",
+                cssRules:"width:600px;height:350px;",
                 buttons:[
                 {
                     className:'edui-okbutton',
@@ -472,7 +510,7 @@ UE.plugins['checkboxs'] = function () {
                 name:thePlugins,
                 editor:this,
                 title: '复选框组',
-                cssRules:"width:600px;height:400px;",
+                cssRules:"width:600px;height:350px;",
                 buttons:[
                 {
                     className:'edui-okbutton',
@@ -548,7 +586,7 @@ UE.plugins['textarea'] = function () {
                 name:thePlugins,
                 editor:this,
                 title: '多行文本框',
-                cssRules:"width:600px;height:330px;",
+                cssRules:"width:600px;height:310px;",
                 buttons:[
                 {
                     className:'edui-okbutton',
@@ -621,7 +659,7 @@ UE.plugins['select'] = function () {
                 name:thePlugins,
                 editor:this,
                 title: '下拉菜单',
-                cssRules:"width:590px;height:370px;",
+                cssRules:"width:600px;height:330px;",
                 buttons:[
                 {
                     className:'edui-okbutton',
@@ -701,7 +739,7 @@ UE.plugins['progressbar'] = function () {
                 name:thePlugins,
                 editor:this,
                 title: '进度条',
-                cssRules:"width:600px;height:450px;",
+                cssRules:"width:600px;height:390px;",
                 buttons:[
                 {
                     className:'edui-okbutton',
@@ -775,7 +813,7 @@ UE.plugins['qrcode'] = function () {
                 name:thePlugins,
                 editor:this,
                 title: '二维码',
-                cssRules:"width:600px;height:380px;",
+                cssRules:"width:600px;height:350px;",
                 buttons:[
                 {
                     className:'edui-okbutton',
@@ -849,7 +887,7 @@ UE.plugins['listctrl'] = function () {
                 name:thePlugins,
                 editor:this,
                 title: '列表控件',
-                cssRules:"width:560px;height:420px;",
+                cssRules:"width:600px;height:420px;",
                 buttons:[
                 {
                     className:'edui-okbutton',

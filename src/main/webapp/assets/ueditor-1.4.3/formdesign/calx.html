@@ -1,0 +1,410 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>公式设计器</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" >
+<meta name="generator" content="www.leipi.org" />
+<link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+<!--[if lte IE 6]>
+<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-ie6.css">
+<![endif]-->
+<!--[if lte IE 7]>
+<link rel="stylesheet" type="text/css" href="bootstrap/css/ie.css">
+<![endif]-->
+<link rel="stylesheet" href="leipi.style.css">
+<style type="text/css">
+	.dropdown-menu {min-width: 120px;}
+	.dropdown-menu > li > a {font-size: 12px}
+</style>
+<script type="text/javascript" src="../dialogs/internal.js"></script>
+<script type="text/javascript" src="../third-party/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	function createElement(type, name) {
+		var element = null;
+		try {
+			element = document.createElement('<' + type + ' name="' + name + '">');
+		} catch (e) {
+		}
+		if (element == null) {
+			element = document.createElement(type);
+			element.name = name;
+		}
+		return element;
+	}
+</script>
+</head>
+<body>
+<div class="content">
+	<div class="alert" style="margin-bottom: 10px;">
+		<!-- <button type="button" class="close" onclick="$(this).parent().remove()">×</button> -->
+		<strong>提示：</strong>以下所有的公式基本与Excel类似。
+	</div>
+	<table class="table table-bordered table-striped table-hover">
+		<tr>
+	        <th width="55px"><span>控件</span><span class="label label-important">*</span></th>
+	        <td>
+	        	<select id="fields"></select><input id="datacell" type="hidden">
+	        	<button title="选定" class="btn btn-info" onclick="formula_exp_accept();"><i class="icon-ok-circle icon-white"></i></button>
+	        </td>
+	    </tr>
+		<tr>
+			<th><span>函数</span></th>
+	        <td>
+	        	<div class="btn-group">
+  					<a class="btn btn-small dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+						统计函数 <span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="javascript:;" title="MAX" onclick="formula_func_max();">最大值</a></li>
+						<li><a href="javascript:;" title="MIN" onclick="formula_func_min();">最小值</a></li>
+						<li><a href="javascript:;" title="AVERAGE" onclick="formula_func_average();">平均值</a></li>
+						<li><a href="javascript:;" title="ABS" onclick="formula_func_abs();">绝对值</a></li>
+						<li><a href="javascript:;" title="SUM" onclick="formula_func_sum();">求和</a></li>
+						<li><a href="javascript:;" title="MOD" onclick="formula_func_mod();">求余</a></li>
+					</ul>
+				</div>
+				<div class="btn-group">
+  					<a class="btn btn-small btn-info dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+						逻辑判断 <span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="javascript:;" title="IF" onclick="formula_func_if();">条件判断</a></li>
+						<li><a href="javascript:;" title="AND" onclick="formula_func_and();">与运算</a></li>
+						<li><a href="javascript:;" title="OR" onclick="formula_func_or();">或运算</a></li>
+						<li><a href="javascript:;" title="NOT" onclick="formula_func_not();">非运算</a></li>
+					</ul>
+				</div>
+				<div class="btn-group">
+  					<a class="btn btn-small dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+						文本函数 <span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="javascript:;" title="CONCAT" onclick="formula_func_concat();">字符串连接</a></li>
+						<li><a href="javascript:;" title="MID" onclick="formula_func_mid();">字符串截取</a></li>
+						<li><a href="javascript:;" title="LEFT" onclick="formula_func_left();">从左截取字符串</a></li>
+						<li><a href="javascript:;" title="RIGHT" onclick="formula_func_right();">从右截取字符串</a></li>
+					</ul>
+				</div>
+				<div class="btn-group">
+  					<a class="btn btn-small btn-info dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+						时间函数1 <span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="javascript:;" title="NOW" onclick="formula_func_now();">当前日期</a></li>
+						<li><a href="javascript:;" title="YEAR" onclick="formula_func_year();">取年份</a></li>
+						<li><a href="javascript:;" title="MONTH" onclick="formula_func_month();">取月份</a></li>
+						<li><a href="javascript:;" title="DAY" onclick="formula_func_day();">取日期</a></li>
+					</ul>
+				</div>
+				<div class="btn-group">
+  					<a class="btn btn-small btn-info dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+						时间函数2 <span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="javascript:;" title="HOUR" onclick="formula_func_hour();">取小时</a></li>
+						<li><a href="javascript:;" title="MINUTE" onclick="formula_func_minute();">取分钟</a></li>
+						<li><a href="javascript:;" title="SECOND" onclick="formula_func_second();">取秒钟</a></li>
+						<li><a href="javascript:;" title="WEEKDAY" onclick="formula_func_weekday();">转换为周几</a></li>
+					</ul>
+				</div>
+	        </td>
+	    </tr>
+	    <tr>
+			<th style="padding:8px 6px;"><span>公式预览</span></th>
+	        <td id="formula-preview" style="color:#000;"></td>
+	    </tr>
+	    <tr>
+	    	<th><span>公式设计</span></th>
+	        <td>
+				<div id="formula-exp" style="width:475px;height:95px;margin:3px;font-size:12px;line-height:20px;text-align:left;background-color:white;border:1px solid #d4d4d4;ime-mode:disabled;padding:2px 5px;word-wrap:break-word;"
+					contenteditable="true" oncontextmenu="return false;" onkeyup="formula_exp_preview();" onkeydown="formula_exp_keylistener(event);"></div>
+	        </td>
+	    </tr>
+    </table>
+</div>
+<script type="text/javascript">
+	var oNode = null, thePlugins = 'calx', fields = {};
+	window.onload = function() {
+		var current = '';
+		if (UE.plugins[thePlugins].editdom) {
+			// 由于该公式设计必须先设计控件，所以肯定会执行如下的分支
+			oNode = UE.plugins[thePlugins].editdom;
+			current = oNode.getAttribute('data-cell');
+			var formula = oNode.getAttribute('data-formula'),// 公式
+				fsource = oNode.getAttribute('fsource'), // 公式的源html
+				preview = oNode.getAttribute('data-preview');
+			formula = formula == null ? '' : formula.replace(/&quot;/g, "\"");
+			fsource = fsource == null ? '' : fsource.replace(/&quot;/g, "\"");
+			// 读取数据值
+			$('#formula-exp').html(fsource);
+			$('#formula-preview').html(preview);
+		}
+		if (window.parent.leipiEditor) {
+			// 获取父页面的html，并获取字段
+			var html = window.parent.leipiEditor.getContent();
+			var options = '';
+			$(html).find('[data-cell]').each(function() {
+				if (current != $(this).attr('data-cell')) {
+					// 存储控件单元格编号与控件名称的对应关系，用于提示信息的替换
+					fields[$(this).attr('data-cell')] = $(this).attr('title');
+					options += '<option value="' + $(this).attr('data-cell') + '">' + $(this).attr('title') + '</option>';
+				}
+			})
+			$('#fields').html(options);
+		} else {
+			$('#fields').html('<option value="">' + 无可用控件 + '</option>');
+		}
+	}
+	dialog.oncancel = function() {
+		if (UE.plugins[thePlugins].editdom) {
+			delete UE.plugins[thePlugins].editdom;
+		}
+	};
+	dialog.onok = function() {
+		// 去除html中的<br>，&nbsp;，以及自动转化为空格的&nbsp;
+		var fsource = $('#formula-exp').html().replace(/<br>/g, '').replace(/&nbsp;/g, '').replace(/<\/b>\s/g, '</b>').replace(/\"/g, "&quot;");
+		var formula = $('#formula-exp').text().replace(/\s/g, '').replace(/\"/g, "&quot;");
+		if (formula == '') {
+			// alert('请设计公式');
+			if (oNode) {
+				// 处理清除公式的情况
+				oNode.removeAttribute('fsource');
+				oNode.removeAttribute('data-formula');
+				oNode.removeAttribute('data-msg');
+				delete UE.plugins[thePlugins].editdom;
+			}
+		} else {
+			// 提示信息的处理
+			var preview = formula;
+			for (key in fields) {
+				var reg = new RegExp(key, "g");
+				preview = preview.replace(reg, fields[key]);
+			}
+			if (oNode) {
+				oNode.setAttribute('fsource', fsource);
+				oNode.setAttribute('data-formula', formula);
+				oNode.setAttribute('data-preview', preview);
+				delete UE.plugins[thePlugins].editdom;
+			} else {
+				// 因为只存在编辑的状况，所以不会执行该分支
+			}
+		}
+	};
+	// 处理选择的控件
+	function formula_exp_accept() {
+		var cell = $('#fields').val();
+		if (cell) {
+			if(datacell == cell){
+				alert("不能选择使用自己作为计算条件");
+			} else {
+				// 选中字段才执行
+				var title = $('#fields').find(':selected').text();
+				// 拼接一个字段的html块，便于显示和删除
+				var html =
+					'<b title="' + title + '" contenteditable="false" ' +
+						'style="cursor:pointer;background-color:#ffc;" ' +
+						'onmousedown="if(event.button==2){jQuery(this).remove();formula_exp_preview();}">' +
+						cell +
+					'</b>';
+				// 这里使用&nbsp;可以避免输入上的问题，在获取html时替换掉即可
+				formula_exp_insert('&nbsp;' + html + '&nbsp;', document.getElementById('formula-exp'));
+				// 处理公式的预览
+				formula_exp_preview();
+			}
+		} else {
+			alert('请选择表单控件');
+		}
+	}
+	// 公式预览的方法
+	function formula_exp_preview() {
+		// 提示信息的处理
+		var preview = $('#formula-exp').text().replace(/\s/g, '').replace(/\"/g, "&quot;");
+		for (key in fields) {
+			var reg = new RegExp(key, "g");
+			preview = preview.replace(reg, fields[key]);
+		}
+		$('#formula-preview').html(preview);
+	}
+	// 通用的增加函数html的方法
+	function formula_func_common(title, html) {
+		var html = '<span class="formula" title="' + title + '" style="background-color:#ddd;">' + html + '</span>';
+		formula_exp_insert('&nbsp;' + html + '&nbsp;', document.getElementById('formula-exp'));
+		formula_exp_preview();
+	}
+	// MAX
+	function formula_func_max() {
+		formula_func_common('MAX(数值1, 数值2, ...)', 'MAX(num1, num2)');
+	}
+	// MIN
+	function formula_func_min() {
+		formula_func_common('MIN(数值1, 数值2, ...)', 'MIN(num1, num2)');
+	}
+	// AVERAGE
+	function formula_func_average() {
+		formula_func_common('AVERAGE(数值1, 数值2, ...)', 'AVERAGE(num1, num2)');
+	}
+	// ABS
+	function formula_func_abs() {
+		formula_func_common('ABS(数值)', 'ABS(number)');
+	}
+	// SUM
+	function formula_func_sum() {
+		formula_func_common('SUM(数值1, 数值2, ...)', 'SUM(num1, num2)');
+	}
+	// MOD
+	function formula_func_mod() {
+		formula_func_common('MOD(被除数, 除数)', 'MOD(number, divisor)');
+	}
+	// IF
+	function formula_func_if() {
+		formula_func_common('IF(条件表达式, 真值, 假值)', 'IF(logical, true, false)');
+	}
+	// AND
+	function formula_func_and() {
+		formula_func_common('AND(逻辑1, 逻辑2, ...)', 'AND(logical1, logical2)');
+	}
+	// OR
+	function formula_func_or() {
+		formula_func_common('OR(逻辑1, 逻辑2, ...)', 'OR(logical1, logical2)');
+	}
+	// NOT
+	function formula_func_not() {
+		formula_func_common('NOT(逻辑)', 'NOT(logical)');
+	}
+	// CONCAT
+	function formula_func_concat() {
+		formula_func_common('CONCAT(字符串1, 字符串2, ...)', 'CONCAT(text1, text2)');
+	}
+	// MID
+	function formula_func_mid() {
+		formula_func_common('MID(字符串, 起始位置, 结束位置)', 'MID(text, start, end)');
+	}
+	// LEFT
+	function formula_func_left() {
+		formula_func_common('LEFT(字符串, 截取字符个数)', 'LEFT(text, num)');
+	}
+	// RIGHT
+	function formula_func_right() {
+		formula_func_common('RIGHT(字符串, 截取字符个数)', 'RIGHT(text, num)');
+	}
+	// YEAR
+	function formula_func_year() {
+		formula_func_common('YEAR(日期时间)', 'YEAR(date)');
+	}
+	// MONTH
+	function formula_func_month() {
+		formula_func_common('MONTH(日期时间)', 'MONTH(date)');
+	}
+	// DAY
+	function formula_func_day() {
+		formula_func_common('DAY(日期时间)', 'DAY(date)');
+	}
+	// HOUR
+	function formula_func_hour() {
+		formula_func_common('HOUR(日期时间)', 'HOUR(date)');
+	}
+	// MINUTE
+	function formula_func_minute() {
+		formula_func_common('MINUTE(日期时间)', 'MINUTE(date)');
+	}
+	// SECOND
+	function formula_func_second() {
+		formula_func_common('SECOND(日期时间)', 'SECOND(date)');
+	}
+	// WEEKDAY
+	function formula_func_weekday() {
+		formula_func_common('WEEKDAY(日期时间)', 'WEEKDAY(date)');
+	}
+	// NOW
+	function formula_func_now() {
+		formula_func_common('NOW()', 'NOW()');
+	}
+	/**
+	 * 按键操作
+	 */
+	function formula_exp_keylistener(event) {
+		// 按键之后，处理空的函数体<span>
+		jQuery('#formula-exp').find('.formula').each(function() {
+			if (jQuery(this).text() == '') {
+				jQuery(this).remove();
+			}
+		});
+	}
+	/**
+	 * 在当前焦点位置插入html
+	 * @param html 需要插入的html
+	 * @param el 目标元素
+	 */
+	function formula_exp_insert(html, el) {
+		var sel, range;
+		if (window.getSelection) {
+			// IE9 and non-IE
+			sel = window.getSelection();
+			if (_formula_selected(el)) {
+				if (sel.getRangeAt && sel.rangeCount) {
+					range = sel.getRangeAt(0);
+					range.deleteContents();
+					var el = document.createElement("div");
+					el.innerHTML = html;
+					var frag = document.createDocumentFragment(), node, lastNode;
+					while ((node = el.firstChild)) {
+						lastNode = frag.appendChild(node);
+					}
+					range.insertNode(frag);
+					// Preserve the selection
+					if (lastNode) {
+						range = range.cloneRange();
+						range.setStartAfter(lastNode);
+						range.collapse(true);
+						sel.removeAllRanges();
+						sel.addRange(range);
+					}
+				} else if (document.selection && document.selection.type != "Control") {
+					// IE < 9
+					document.selection.createRange().pasteHTML(html);
+				}
+			}
+		}
+	}
+	/**
+	 * 判断目标元素是否含有选中的内容
+	 * @param elem 目标元素
+	 */
+	function _formula_selected(elem) {
+		var sel;
+		if (window.getSelection) {
+			sel = window.getSelection();
+			if (sel.rangeCount > 0) {
+				for (var i = 0; i < sel.rangeCount; ++i) {
+					var node = sel.getRangeAt(i).commonAncestorContainer;
+					var flag = false;
+					while (node) {
+						if (node === elem) {
+							flag = true;
+							break;
+						}
+						node = node.parentNode;
+					}
+					if (!flag) {
+						return false;
+					}
+				}
+				return true;
+			}
+		} else if ((sel = document.selection) && sel.type != "Control") {
+			var node = sel.createRange().parentElement();
+			while (node) {
+				if (node === elem) {
+					return true;
+				}
+				node = node.parentNode;
+			}
+			return false;
+		}
+		return false;
+	}
+</script>
+</body>
+</html>

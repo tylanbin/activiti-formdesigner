@@ -66,6 +66,8 @@ window.onload = function() {
         $G('orgwidth').value = gWidth;
         $G('orgheight').value = gHeight;
     }
+	// 自动聚焦到名称上
+    $G('orgname').focus();
 }
 dialog.oncancel = function () {
     if( UE.plugins[thePlugins].editdom ) {

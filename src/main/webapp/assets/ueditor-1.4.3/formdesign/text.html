@@ -107,6 +107,8 @@ window.onload = function() {
         $G('orgalign').value = gAlign;
         $G('orgtype').value = gType;
     }
+    // 自动聚焦到名称上
+    $G('orgname').focus();
 }
 dialog.oncancel = function () {
     if( UE.plugins[thePlugins].editdom ) {
@@ -128,6 +130,8 @@ dialog.onok = function (){
             oNode.setAttribute('value',gValue);
             oNode.setAttribute('name','leipiNewField');
             oNode.setAttribute('leipiPlugins',thePlugins);
+            // 公式的单元格标记
+            oNode.setAttribute('data-cell','F'+(new Date()).valueOf());
             if ( $G('orghide').checked ) {
                 oNode.setAttribute('orghide',1);
             } else {

@@ -31,6 +31,10 @@ function createElement(type, name)
 </head>
 <body>
 <div class="content">
+	<div class="alert" style="margin-bottom: 10px;">
+		<!-- <button type="button" class="close" onclick="$(this).parent().remove()">×</button> -->
+		<strong>提示：</strong>二维码只支持少量内容，请不要加入大量内容。
+	</div>
     <table class="table table-bordered table-striped" style="margin-bottom:10px">
      <tr>
         <th><span>控件名称</span><span class="label label-important">*</span></th>
@@ -69,7 +73,6 @@ function createElement(type, name)
         </td>
     </tr>
     </table>
-    <div class="alert alert-danger">提示：二维码只支持少量内容，请不要加入大量内容</div>
 </div>
 <script type="text/javascript">
 var oNode = null,thePlugins = 'qrcode';
@@ -83,6 +86,8 @@ var oNode = null,thePlugins = 'qrcode';
         $G('orgheight').value = gHeight;
         $G('orgtype').value = gType;
     }
+	// 自动聚焦到名称上
+    $G('orgname').focus();
 }
 dialog.oncancel = function () {
     if( UE.plugins[thePlugins].editdom ) {

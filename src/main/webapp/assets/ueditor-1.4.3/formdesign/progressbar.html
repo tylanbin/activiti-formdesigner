@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="leipi.style.css">
     <style type="text/css">
     	.radio {margin-bottom:5px;}
+    	.progress {margin-bottom:10px;}
     </style>
     <script type="text/javascript" src="../dialogs/internal.js"></script>
     <script type="text/javascript">
@@ -34,7 +35,7 @@ function createElement(type, name)
 </head>
 <body>
 <div class="content">
-    <table class="table table-bordered table-striped table-hover">
+    <table class="table table-bordered table-striped">
     <tr>
         <th><span>控件名称</span><span class="label label-important">*</span></th>
         <th><span>跨度</span></th>
@@ -90,6 +91,8 @@ window.onload = function() {
             }
         }
     }
+	// 自动聚焦到名称上
+    $G('orgname').focus();
 }
 dialog.oncancel = function () {
     if( UE.plugins[thePlugins].editdom ) {

@@ -224,9 +224,9 @@ window.onload = function() {
             if(inputTags[i].type =='radio')
                 fnAddComboTr(gName,inputTags[i]);
         }
-        
-
     }
+	// 自动聚焦到名称上
+    $G('orgname').focus();
 }
 dialog.oncancel = function () {
     if( UE.plugins[thePlugins].editdom ) {
