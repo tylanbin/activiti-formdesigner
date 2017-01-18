@@ -11,6 +11,9 @@
 <script type="text/javascript" charset="utf-8" src="assets/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="assets/My97DatePicker/WdatePicker.js"></script>
 <style type="text/css">
+	body {
+		font-size: 12px;
+	}
 	table {
 		border-color: #666 !important;
 		border-width: 1px 0 0 1px;
@@ -31,9 +34,6 @@
 		padding: 2px 3px;
 		min-width: 60px;
 		word-break: keep-all;
-	}
-	.listctrl {
-		font-size: 12px;
 	}
 </style>
 <script type="text/javascript">
