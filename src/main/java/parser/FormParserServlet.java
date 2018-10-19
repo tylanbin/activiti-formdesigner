@@ -168,7 +168,7 @@ public class FormParserServlet extends HttpServlet {
 				// 这里需要一个hidden来存储一个json，用于保存二维表的属性结构，用于动态增删行操作
 				ObjectNode props = om.createObjectNode();
 				props.put("id", uuid);
-				props.put("cols", arr);
+				props.set("cols", arr);
 				// 为了与生成的json的双引号进行区分，注意value两侧是'
 				sb.append("<input id=\"" + uuid + "_prop\" class=\"listctrl_prop\" type=\"hidden\" value='" + om.writeValueAsString(props) + "' />");
 				// 此外还需要一个hidden用于记录二维表的行数，记录的行数会在查看历史数据时使用
